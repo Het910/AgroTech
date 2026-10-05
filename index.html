@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1f7a4c" />
+    <meta
+      name="description"
+      content="AgroTech farm management app for crop health, irrigation, weather, and production tracking."
+    />
+    <title>AgroTech | Farm Dashboard</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">A</div>
+          <div>
+            <h1>AgroTech</h1>
+            <p>Smart Farm</p>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="nav-item active">Dashboard</button>
+          <button class="nav-item">Farm Overview</button>
+          <button class="nav-item">Crops</button>
+          <button class="nav-item">Watering</button>
+          <button class="nav-item">Weather</button>
+        </nav>
+
+        <div class="sidebar-card">
+          <span class="status-dot online" id="connectionStatusDot"></span>
+          <div>
+            <strong id="connectionStatusText">Online</strong>
+            <small>Sync active</small>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Farm Dashboard</p>
+            <h2>Green Valley Farm</h2>
+          </div>
+          <div class="header-actions">
+            <div class="location-tag">Kisumu, Kenya</div>
+            <button id="refreshDataBtn" class="primary-btn">Refresh Data</button>
+          </div>
+        </header>
+
+        <section class="metrics-grid">
+          <article class="metric-card success">
+            <div class="metric-header">
+              <span>Crop Health</span>
+              <span class="trend positive">+8.2%</span>
+            </div>
+            <h3 id="cropHealthScore">86%</h3>
+            <p>Overall plant vitality</p>
+          </article>
+
+          <article class="metric-card warning">
+            <div class="metric-header">
+              <span>Watering</span>
+              <span class="trend neutral">Auto</span>
+            </div>
+            <h3 id="waterLevel">68%</h3>
+            <p>Soil moisture index</p>
+          </article>
+
+          <article class="metric-card info">
+            <div class="metric-header">
+              <span>Production</span>
+              <span class="trend positive">+12%</span>
+            </div>
+            <h3 id="productionTotal">4,782 kg</h3>
+            <p>Season total</p>
+          </article>
+
+          <article class="metric-card danger">
+            <div class="metric-header">
+              <span>Alerts</span>
+              <span class="trend negative">3</span>
+            </div>
+            <h3 id="alertsCount">3</h3>
+            <p>Immediate actions</p>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel broad">
+            <div class="panel-header">
+              <h3>Farm Details</h3>
+              <button class="ghost-btn">Edit</button>
+            </div>
+            <div class="farm-details">
+              <div>
+                <label>Farm name</label>
+                <strong>Green Valley Farm</strong>
+              </div>
+              <div>
+                <label>Area</label>
+                <strong>42 hectares</strong>
+              </div>
+              <div>
+                <label>Soil type</label>
+                <strong>Loamy clay</strong>
+              </div>
+              <div>
+                <label>Irrigation</label>
+                <strong>Drip + sprinkler</strong>
+              </div>
+              <div>
+                <label>Crop mix</label>
+                <strong>Maize, rice, tomatoes</strong>
+              </div>
+              <div>
+                <label>Equipment</label>
+                <strong>6 sensors, 3 pumps</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <h3>Crop Health</h3>
+              <button class="ghost-btn">Insights</button>
+            </div>
+            <div id="cropHealthList" class="crop-list"></div>
+          </article>
+        </section>
+
+        <section class="content-grid lower-grid">
+          <article class="panel">
+            <div class="panel-header">
+              <h3>Watering Management</h3>
+              <button id="toggleWaterBtn" class="primary-btn small">Start irrigation</button>
+            </div>
+
+            <div class="water-control">
+              <div class="meter">
+                <div id="waterProgress" class="meter-fill"></div>
+              </div>
+              <div class="water-status-row">
+                <span>Moisture</span>
+                <strong id="moistureValue">68%</strong>
+              </div>
+            </div>
+
+            <div class="schedule-list">
+              <div>
+                <span>Next cycle</span>
+                <strong>06:30 AM</strong>
+              </div>
+              <div>
+                <span>Flow rate</span>
+                <strong>182 L/min</strong>
+              </div>
+              <div>
+                <span>Pressure</span>
+                <strong>4.6 bar</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <h3>Production Overview</h3>
+              <button class="ghost-btn">Report</button>
+            </div>
+
+            <div class="production-box">
+              <div>
+                <span>This week</span>
+                <strong id="weeklyProduction">930 kg</strong>
+              </div>
+              <div>
+                <span>Monthly</span>
+                <strong id="monthlyProduction">2,860 kg</strong>
+              </div>
+              <div>
+                <span>Estimated yield</span>
+                <strong id="estimatedYield">5,100 kg</strong>
+              </div>
+            </div>
+
+            <div class="mini-chart" aria-label="Production trend chart">
+              <span style="height: 45%"></span>
+              <span style="height: 60%"></span>
+              <span style="height: 58%"></span>
+              <span style="height: 72%"></span>
+              <span style="height: 80%"></span>
+              <span style="height: 88%"></span>
+              <span style="height: 92%"></span>
+            </div>
+          </article>
+
+          <article class="panel weather-panel">
+            <div class="panel-header">
+              <h3>Weather & Nearby</h3>
+              <button class="ghost-btn">Map</button>
+            </div>
+
+            <div class="weather-summary">
+              <div>
+                <p class="weather-temp" id="weatherTemp">28°C</p>
+                <small id="weatherCondition">Partly Cloudy</small>
+              </div>
+              <div class="weather-icon" id="weatherIcon">☀️</div>
+            </div>
+
+            <div class="weather-list" id="weatherForecast"></div>
+          </article>
+        </section>
+
+        <section class="content-grid recommendations-grid">
+          <article class="panel">
+            <div class="panel-header">
+              <h3>What Needs Improvement</h3>
+              <button class="ghost-btn">Optimize</button>
+            </div>
+            <ul id="improvementList" class="improvement-list"></ul>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <h3>Field Notes</h3>
+              <button class="ghost-btn">Add note</button>
+            </div>
+            <div class="notes-box">
+              <p>
+                Tomatoes in sector B need more calcium support to improve fruit firmness.
+                The rice fields show slight water stress during the early afternoon.
+              </p>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

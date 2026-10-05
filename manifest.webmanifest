@@ -1,0 +1,17 @@
+{
+  "name": "AgroTech Farm Dashboard",
+  "short_name": "AgroTech",
+  "description": "Smart agriculture dashboard for crop health, irrigation, weather, and production tracking.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#edf6ee",
+  "theme_color": "#1f7a4c",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%231f7a4c'/%3E%3Cpath d='M256 110c-42 70-90 110-90 180 0 57 39 92 90 92s90-35 90-92c0-70-48-110-90-180zm0 76c24 35 47 63 47 98 0 28-17 52-47 52s-47-24-47-52c0-35 23-63 47-98z' fill='white'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
