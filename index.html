@@ -3,241 +3,370 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1f7a4c" />
+    <meta name="theme-color" content="#10b981" />
     <meta
       name="description"
-      content="AgroTech farm management app for crop health, irrigation, weather, and production tracking."
+      content="AgroTech - Smart farm management with crop health, irrigation, weather, and production tracking."
     />
-    <title>AgroTech | Farm Dashboard</title>
+    <title>AgroTech | Smart Farm Dashboard</title>
     <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="app-shell">
       <aside class="sidebar">
         <div class="brand">
-          <div class="brand-mark">A</div>
+          <div class="brand-mark">
+            <i class="fas fa-leaf"></i>
+          </div>
           <div>
             <h1>AgroTech</h1>
-            <p>Smart Farm</p>
+            <p>Smart Farming</p>
           </div>
         </div>
 
         <nav class="nav">
-          <button class="nav-item active">Dashboard</button>
-          <button class="nav-item">Farm Overview</button>
-          <button class="nav-item">Crops</button>
-          <button class="nav-item">Watering</button>
-          <button class="nav-item">Weather</button>
+          <button class="nav-item active" data-section="dashboard">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-item" data-section="farm">
+            <i class="fas fa-barn"></i>
+            <span>Farm Overview</span>
+          </button>
+          <button class="nav-item" data-section="crops">
+            <i class="fas fa-sprout"></i>
+            <span>Crops</span>
+          </button>
+          <button class="nav-item" data-section="watering">
+            <i class="fas fa-tint"></i>
+            <span>Irrigation</span>
+          </button>
+          <button class="nav-item" data-section="weather">
+            <i class="fas fa-cloud-sun"></i>
+            <span>Weather</span>
+          </button>
         </nav>
 
         <div class="sidebar-card">
-          <span class="status-dot online" id="connectionStatusDot"></span>
-          <div>
-            <strong id="connectionStatusText">Online</strong>
-            <small>Sync active</small>
+          <div class="status-indicator">
+            <span class="status-dot online" id="connectionStatusDot"></span>
+            <div>
+              <strong id="connectionStatusText">Online</strong>
+              <small>Live sync</small>
+            </div>
           </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <p class="version">v1.0.0</p>
         </div>
       </aside>
 
       <main class="main-panel">
         <header class="topbar">
-          <div>
-            <p class="eyebrow">Farm Dashboard</p>
-            <h2>Green Valley Farm</h2>
+          <div class="topbar-left">
+            <button class="menu-toggle" id="menuToggle">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div>
+              <p class="eyebrow">Welcome Back, Farmer</p>
+              <h2>Green Valley Farm</h2>
+            </div>
           </div>
           <div class="header-actions">
-            <div class="location-tag">Kisumu, Kenya</div>
-            <button id="refreshDataBtn" class="primary-btn">Refresh Data</button>
+            <div class="location-badge">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Kisumu, Kenya</span>
+            </div>
+            <button id="refreshDataBtn" class="btn-refresh">
+              <i class="fas fa-sync-alt"></i>
+              Refresh
+            </button>
+            <div class="user-avatar">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=farmer" alt="User" />
+            </div>
           </div>
         </header>
 
         <section class="metrics-grid">
-          <article class="metric-card success">
-            <div class="metric-header">
-              <span>Crop Health</span>
-              <span class="trend positive">+8.2%</span>
+          <article class="stat-card health-card">
+            <div class="card-header">
+              <div class="icon-box health">
+                <i class="fas fa-heartbeat"></i>
+              </div>
+              <div class="trend-badge positive">
+                <i class="fas fa-arrow-up"></i> 8.2%
+              </div>
             </div>
-            <h3 id="cropHealthScore">86%</h3>
-            <p>Overall plant vitality</p>
+            <div class="card-content">
+              <h3 id="cropHealthScore">86%</h3>
+              <p>Crop Health</p>
+            </div>
           </article>
 
-          <article class="metric-card warning">
-            <div class="metric-header">
-              <span>Watering</span>
-              <span class="trend neutral">Auto</span>
+          <article class="stat-card water-card">
+            <div class="card-header">
+              <div class="icon-box water">
+                <i class="fas fa-droplet"></i>
+              </div>
+              <div class="trend-badge neutral">
+                <i class="fas fa-circle"></i> Active
+              </div>
             </div>
-            <h3 id="waterLevel">68%</h3>
-            <p>Soil moisture index</p>
+            <div class="card-content">
+              <h3 id="waterLevel">68%</h3>
+              <p>Soil Moisture</p>
+            </div>
           </article>
 
-          <article class="metric-card info">
-            <div class="metric-header">
-              <span>Production</span>
-              <span class="trend positive">+12%</span>
+          <article class="stat-card production-card">
+            <div class="card-header">
+              <div class="icon-box production">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <div class="trend-badge positive">
+                <i class="fas fa-arrow-up"></i> 12%
+              </div>
             </div>
-            <h3 id="productionTotal">4,782 kg</h3>
-            <p>Season total</p>
+            <div class="card-content">
+              <h3 id="productionTotal">4,782 kg</h3>
+              <p>Total Yield</p>
+            </div>
           </article>
 
-          <article class="metric-card danger">
-            <div class="metric-header">
-              <span>Alerts</span>
-              <span class="trend negative">3</span>
+          <article class="stat-card alert-card">
+            <div class="card-header">
+              <div class="icon-box alert">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="trend-badge danger">
+                <i class="fas fa-exclamation"></i> Action
+              </div>
             </div>
-            <h3 id="alertsCount">3</h3>
-            <p>Immediate actions</p>
+            <div class="card-content">
+              <h3 id="alertsCount">3</h3>
+              <p>Active Alerts</p>
+            </div>
           </article>
         </section>
 
         <section class="content-grid">
-          <article class="panel broad">
+          <article class="panel farm-panel">
             <div class="panel-header">
-              <h3>Farm Details</h3>
-              <button class="ghost-btn">Edit</button>
+              <div>
+                <h3><i class="fas fa-tree"></i> Farm Details</h3>
+                <p class="subtitle">Your farming operations</p>
+              </div>
+              <button class="btn-icon" title="Edit farm details">
+                <i class="fas fa-edit"></i>
+              </button>
             </div>
-            <div class="farm-details">
-              <div>
-                <label>Farm name</label>
-                <strong>Green Valley Farm</strong>
+            <div class="farm-grid">
+              <div class="farm-item">
+                <div class="farm-icon">
+                  <i class="fas fa-ruler"></i>
+                </div>
+                <div>
+                  <small>Total Area</small>
+                  <strong>42 hectares</strong>
+                </div>
               </div>
-              <div>
-                <label>Area</label>
-                <strong>42 hectares</strong>
+              <div class="farm-item">
+                <div class="farm-icon">
+                  <i class="fas fa-layer-group"></i>
+                </div>
+                <div>
+                  <small>Soil Type</small>
+                  <strong>Loamy Clay</strong>
+                </div>
               </div>
-              <div>
-                <label>Soil type</label>
-                <strong>Loamy clay</strong>
+              <div class="farm-item">
+                <div class="farm-icon">
+                  <i class="fas fa-water"></i>
+                </div>
+                <div>
+                  <small>Irrigation</small>
+                  <strong>Drip + Sprinkler</strong>
+                </div>
               </div>
-              <div>
-                <label>Irrigation</label>
-                <strong>Drip + sprinkler</strong>
-              </div>
-              <div>
-                <label>Crop mix</label>
-                <strong>Maize, rice, tomatoes</strong>
-              </div>
-              <div>
-                <label>Equipment</label>
-                <strong>6 sensors, 3 pumps</strong>
+              <div class="farm-item">
+                <div class="farm-icon">
+                  <i class="fas fa-microchip"></i>
+                </div>
+                <div>
+                  <small>Equipment</small>
+                  <strong>6 Sensors</strong>
+                </div>
               </div>
             </div>
           </article>
 
-          <article class="panel">
+          <article class="panel crop-health-panel">
             <div class="panel-header">
-              <h3>Crop Health</h3>
-              <button class="ghost-btn">Insights</button>
+              <div>
+                <h3><i class="fas fa-spa"></i> Crop Health</h3>
+                <p class="subtitle">Individual plant vitality</p>
+              </div>
+              <button class="btn-icon" title="View insights">
+                <i class="fas fa-chart-line"></i>
+              </button>
             </div>
-            <div id="cropHealthList" class="crop-list"></div>
+            <div id="cropHealthList" class="crop-health-container"></div>
           </article>
         </section>
 
         <section class="content-grid lower-grid">
-          <article class="panel">
+          <article class="panel irrigation-panel">
             <div class="panel-header">
-              <h3>Watering Management</h3>
-              <button id="toggleWaterBtn" class="primary-btn small">Start irrigation</button>
-            </div>
-
-            <div class="water-control">
-              <div class="meter">
-                <div id="waterProgress" class="meter-fill"></div>
-              </div>
-              <div class="water-status-row">
-                <span>Moisture</span>
-                <strong id="moistureValue">68%</strong>
-              </div>
-            </div>
-
-            <div class="schedule-list">
               <div>
-                <span>Next cycle</span>
+                <h3><i class="fas fa-shower"></i> Irrigation Control</h3>
+                <p class="subtitle">Watering management system</p>
+              </div>
+              <button id="toggleWaterBtn" class="btn-primary">
+                <i class="fas fa-play"></i> Start
+              </button>
+            </div>
+
+            <div class="moisture-display">
+              <div class="circular-progress">
+                <svg viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="54" />
+                  <circle cx="60" cy="60" r="54" id="moistureCircle" />
+                </svg>
+                <div class="progress-text">
+                  <strong id="moistureValue">68%</strong>
+                  <small>Moisture</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="water-stats">
+              <div class="stat-row">
+                <span><i class="fas fa-clock"></i> Next Schedule</span>
                 <strong>06:30 AM</strong>
               </div>
-              <div>
-                <span>Flow rate</span>
+              <div class="stat-row">
+                <span><i class="fas fa-tachometer-alt"></i> Flow Rate</span>
                 <strong>182 L/min</strong>
               </div>
-              <div>
-                <span>Pressure</span>
+              <div class="stat-row">
+                <span><i class="fas fa-gauge"></i> Pressure</span>
                 <strong>4.6 bar</strong>
               </div>
             </div>
           </article>
 
-          <article class="panel">
+          <article class="panel production-panel">
             <div class="panel-header">
-              <h3>Production Overview</h3>
-              <button class="ghost-btn">Report</button>
+              <div>
+                <h3><i class="fas fa-chart-bar"></i> Production Analytics</h3>
+                <p class="subtitle">Harvest performance tracking</p>
+              </div>
+              <button class="btn-icon" title="View report">
+                <i class="fas fa-file-pdf"></i>
+              </button>
             </div>
 
-            <div class="production-box">
-              <div>
-                <span>This week</span>
-                <strong id="weeklyProduction">930 kg</strong>
+            <div class="production-cards">
+              <div class="prod-item">
+                <div class="prod-label">This Week</div>
+                <div class="prod-value" id="weeklyProduction">930 kg</div>
               </div>
-              <div>
-                <span>Monthly</span>
-                <strong id="monthlyProduction">2,860 kg</strong>
+              <div class="prod-item">
+                <div class="prod-label">This Month</div>
+                <div class="prod-value" id="monthlyProduction">2,860 kg</div>
               </div>
-              <div>
-                <span>Estimated yield</span>
-                <strong id="estimatedYield">5,100 kg</strong>
+              <div class="prod-item">
+                <div class="prod-label">Est. Total</div>
+                <div class="prod-value" id="estimatedYield">5,100 kg</div>
               </div>
             </div>
 
-            <div class="mini-chart" aria-label="Production trend chart">
-              <span style="height: 45%"></span>
-              <span style="height: 60%"></span>
-              <span style="height: 58%"></span>
-              <span style="height: 72%"></span>
-              <span style="height: 80%"></span>
-              <span style="height: 88%"></span>
-              <span style="height: 92%"></span>
+            <div class="production-chart">
+              <div class="chart-bars">
+                <div class="bar" style="height: 45%"><span>45%</span></div>
+                <div class="bar" style="height: 60%"><span>60%</span></div>
+                <div class="bar" style="height: 58%"><span>58%</span></div>
+                <div class="bar" style="height: 72%"><span>72%</span></div>
+                <div class="bar" style="height: 80%"><span>80%</span></div>
+                <div class="bar" style="height: 88%"><span>88%</span></div>
+                <div class="bar" style="height: 92%"><span>92%</span></div>
+              </div>
+              <div class="chart-labels">
+                <span>W1</span><span>W2</span><span>W3</span><span>W4</span>
+                <span>W5</span><span>W6</span><span>W7</span>
+              </div>
             </div>
           </article>
 
           <article class="panel weather-panel">
             <div class="panel-header">
-              <h3>Weather & Nearby</h3>
-              <button class="ghost-btn">Map</button>
-            </div>
-
-            <div class="weather-summary">
               <div>
-                <p class="weather-temp" id="weatherTemp">28°C</p>
-                <small id="weatherCondition">Partly Cloudy</small>
+                <h3><i class="fas fa-cloud"></i> Weather & Forecast</h3>
+                <p class="subtitle">Local climate data</p>
               </div>
-              <div class="weather-icon" id="weatherIcon">☀️</div>
+              <button class="btn-icon" title="View map">
+                <i class="fas fa-map"></i>
+              </button>
             </div>
 
-            <div class="weather-list" id="weatherForecast"></div>
+            <div class="weather-current">
+              <div class="weather-main">
+                <div class="weather-icon-large" id="weatherIcon">☀️</div>
+                <div class="weather-info">
+                  <p class="weather-temp" id="weatherTemp">28°C</p>
+                  <small id="weatherCondition">Partly Cloudy</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="forecast-grid" id="weatherForecast"></div>
           </article>
         </section>
 
-        <section class="content-grid recommendations-grid">
-          <article class="panel">
+        <section class="recommendations-section">
+          <article class="panel recommendations-panel">
             <div class="panel-header">
-              <h3>What Needs Improvement</h3>
-              <button class="ghost-btn">Optimize</button>
+              <div>
+                <h3><i class="fas fa-lightbulb"></i> Improvement Recommendations</h3>
+                <p class="subtitle">AI-powered crop optimization</p>
+              </div>
+              <button class="btn-icon" title="Optimize settings">
+                <i class="fas fa-sliders-h"></i>
+              </button>
             </div>
-            <ul id="improvementList" class="improvement-list"></ul>
+            <ul id="improvementList" class="recommendations-list"></ul>
           </article>
 
-          <article class="panel">
+          <article class="panel notes-panel">
             <div class="panel-header">
-              <h3>Field Notes</h3>
-              <button class="ghost-btn">Add note</button>
+              <div>
+                <h3><i class="fas fa-sticky-note"></i> Field Notes</h3>
+                <p class="subtitle">Farm observations & reminders</p>
+              </div>
+              <button class="btn-icon" title="Add new note">
+                <i class="fas fa-plus"></i>
+              </button>
             </div>
-            <div class="notes-box">
+            <div class="notes-content">
               <p>
-                Tomatoes in sector B need more calcium support to improve fruit firmness.
-                The rice fields show slight water stress during the early afternoon.
+                <strong>Tomatoes (Sector B):</strong> Need calcium enrichment for better fruit firmness. Apply Ca-fortified fertilizer this week.
+              </p>
+              <p>
+                <strong>Rice Fields:</strong> Water stress observed in early afternoon. Increase irrigation cycle by 15% during peak hours.
+              </p>
+              <p>
+                <strong>Maize Rows:</strong> Monitor wind exposure near western fence. Consider installing windbreaks.
               </p>
             </div>
           </article>
         </section>
+
+        <footer class="app-footer">
+          <p>© 2024 AgroTech. Smart Farming Solutions | <span id="syncStatus">Last sync: just now</span></p>
+        </footer>
       </main>
     </div>
 
